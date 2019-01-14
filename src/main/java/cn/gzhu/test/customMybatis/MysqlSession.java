@@ -1,4 +1,4 @@
-package cn.gzhu.test;
+package cn.gzhu.test.customMybatis;
 
 /**
  * 1.负责mapper接口的实现

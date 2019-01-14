@@ -1,4 +1,4 @@
-package cn.gzhu.test;
+package cn.gzhu.test.customMybatis;
 
 /**
  * 描述：定义操作数据库的动作

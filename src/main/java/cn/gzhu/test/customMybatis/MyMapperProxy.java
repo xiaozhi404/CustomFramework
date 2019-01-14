@@ -1,4 +1,4 @@
-package cn.gzhu.test;
+package cn.gzhu.test.customMybatis;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -16,7 +16,6 @@ public class MyMapperProxy implements InvocationHandler {
     }
 
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-
         String mapperClass = method.getDeclaringClass().getName();
         if (CityMapperXml.nameSpace.equals(mapperClass)) {
             String methodName = method.getName();

@@ -1,7 +1,10 @@
-package cn.gzhu.test;
+package cn.gzhu.test.customMybatis;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
+import cn.gzhu.test.CustomDbPool.IMyPool;
+import cn.gzhu.test.CustomDbPool.MyPoolFactory;
+import cn.gzhu.test.CustomDbPool.MyPooledConnection;
+import cn.gzhu.test.pojo.City;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
@@ -10,7 +13,7 @@ import java.sql.ResultSet;
  */
 public class MyBaseExecutor implements MyExecutor {
 
-    private Connection con = null;
+    private IMyPool pool = MyPoolFactory.getInstance();
     private PreparedStatement pStatment = null;
     private ResultSet resultSet = null;
 
@@ -23,15 +26,11 @@ public class MyBaseExecutor implements MyExecutor {
         }
     }
 
-    public <T> T query(String statement) {
+    public <T> T query(String sql) {
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/contest", "root", null);
-            String sql = statement;
-            pStatment = con.prepareStatement(sql);
-            resultSet = pStatment.executeQuery();
-
+            MyPooledConnection myPooledConnection = pool.getMyPooledConnection();
+            ResultSet resultSet = myPooledConnection.query(sql);
             City city = new City();
-
             if (resultSet.next()) {
                 city.setId(resultSet.getInt("id"));
                 city.setCreatedAt(resultSet.getDate("created_at"));

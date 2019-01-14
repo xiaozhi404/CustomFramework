@@ -1,7 +1,12 @@
 package cn.gzhu.test;
 
+import cn.gzhu.test.customMybatis.CityMapper;
+import cn.gzhu.test.customMybatis.MyDefaultSqlSession;
+import cn.gzhu.test.customMybatis.MysqlSession;
+import cn.gzhu.test.pojo.City;
+
 public class BootStrap {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         Start();
     }
 

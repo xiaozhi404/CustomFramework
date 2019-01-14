@@ -1,4 +1,4 @@
-package cn.gzhu.test;
+package cn.gzhu.test.customMybatis;
 
 
 import java.lang.reflect.Proxy;
@@ -13,7 +13,6 @@ public class MyDefaultSqlSession implements MysqlSession {
     }
 
     public <T> T getMapper(Class<T> clazz) {
-
         return (T) Proxy.newProxyInstance(clazz.getClassLoader(), new Class[]{clazz}, new MyMapperProxy(this));
     }
 }

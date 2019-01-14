@@ -1,11 +1,11 @@
-package cn.gzhu.test;
+package cn.gzhu.test.customMybatis;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class CityMapperXml {
 
-    public static final String nameSpace = "cn.gzhu.test.CityMapper";
+    public static final String nameSpace = "cn.gzhu.test.customMybatis.CityMapper";
 
     private static Map<String, String> methodSqlMap = new HashMap<String, String>();
 
