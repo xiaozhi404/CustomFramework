@@ -17,6 +17,7 @@ public class MyMapperProxy implements InvocationHandler {
 
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         String mapperClass = method.getDeclaringClass().getName();
+        //根据全类名找映射文件
         if (CityMapperXml.nameSpace.equals(mapperClass)) {
             String methodName = method.getName();
             //根据方法名获取sql

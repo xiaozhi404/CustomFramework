@@ -37,6 +37,7 @@ public class MyBaseExecutor implements MyExecutor {
                 city.setName(resultSet.getString("name"));
                 city.setProvinceId(resultSet.getInt("province_id"));
             }
+            myPooledConnection.close();
             return (T)city;
         } catch (Exception e) {
             throw new RuntimeException();
