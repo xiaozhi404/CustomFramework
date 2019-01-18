@@ -1,4 +1,4 @@
-package cn.gzhu.test.CustomDbPool;
+package cn.gzhu.test.customDBPool;
 
 /**
  * 描述：连接池工厂，通过静态内部类方法实现单例模式

@@ -1,8 +1,8 @@
 package cn.gzhu.test.customMybatis;
 
-import cn.gzhu.test.CustomDbPool.IMyPool;
-import cn.gzhu.test.CustomDbPool.MyPoolFactory;
-import cn.gzhu.test.CustomDbPool.MyPooledConnection;
+import cn.gzhu.test.customDBPool.IMyPool;
+import cn.gzhu.test.customDBPool.MyPoolFactory;
+import cn.gzhu.test.customDBPool.MyPooledConnection;
 import cn.gzhu.test.pojo.City;
 
 import java.sql.PreparedStatement;
@@ -20,7 +20,7 @@ public class MyBaseExecutor implements MyExecutor {
 
     static {
         try{
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
         }catch (Exception e) {
             throw new RuntimeException("加载驱动失败");
         }

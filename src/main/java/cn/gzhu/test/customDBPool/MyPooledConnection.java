@@ -1,4 +1,4 @@
-package cn.gzhu.test.CustomDbPool;
+package cn.gzhu.test.customDBPool;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

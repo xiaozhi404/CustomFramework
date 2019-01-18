@@ -1,4 +1,4 @@
-package cn.gzhu.test.CustomDbPool;
+package cn.gzhu.test.customDBPool;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

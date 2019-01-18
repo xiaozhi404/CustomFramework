@@ -1,4 +1,4 @@
-package cn.gzhu.test.CustomDbPool;
+package cn.gzhu.test.customDBPool;
 
 /**
  * 描述：对连接池的管理接口
