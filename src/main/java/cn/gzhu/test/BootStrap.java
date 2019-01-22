@@ -16,8 +16,7 @@ import cn.gzhu.test.pojo.City;
 public class BootStrap {
 
     public static void main(String[] args) {
-        System.out.println(BootStrap.class.getName());
-        //Start();
+        Start();
     }
 
     public static void Start() {
