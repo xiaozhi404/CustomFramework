@@ -22,16 +22,17 @@ import java.util.Set;
  * 2.spring mvc
  */
 public class MyTomcat {
-    private Integer port = 9090;
 
+    private Integer port = 9090;
     //uri 和 servlet全名
-    private Map<String, String> uriServletMap = new HashMap<>();
+    private Map<String, String> uriServletMap = new HashMap<String, String>();
     //servlet是单例的，每次生成后进行保存
-    private Map<String, Object> servletContainer = new HashMap<>();
+    private Map<String, Object> servletContainer = new HashMap<String, Object>();
     //spring 容器
     private ApplicationContext applicationContext;
     //springmvc 前端控制器
     private DispatcherServlet dispatcherServlet;
+
     public MyTomcat(Integer port) {
         this.port = port;
         init();
@@ -39,14 +40,14 @@ public class MyTomcat {
 
     public void init() {
         try {
-            //加载servlet的映射
+            //1 加载servlet的映射
             for (ServletMapping servletMapping : ServletMappingConfig.servletMappings) {
                 uriServletMap.put(servletMapping.getUrl(), servletMapping.getServletClass());
             }
-            //初始化spring容器
+            //2 初始化spring容器
             applicationContext = new ApplicationContext();
             applicationContext.init();
-            //初始化spring mvc容器
+            //3 初始化spring mvc容器
             dispatcherServlet = new DispatcherServlet(applicationContext);
             dispatcherServlet.init();
             servletContainer.put(DispatcherServlet.class.getName(), dispatcherServlet);
@@ -79,7 +80,6 @@ public class MyTomcat {
             }catch (Exception e) {
                 e.printStackTrace();
             }
-
         }
     }
 

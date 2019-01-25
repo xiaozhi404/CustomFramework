@@ -8,7 +8,6 @@ import cn.gzhu.test.myTomcat.MyResponse;
 import cn.gzhu.test.myTomcat.MyServlet;
 
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,13 +18,13 @@ import java.util.Map;
  */
 public class DispatcherServlet extends MyServlet {
 
-    private Map<String, Method> uriMethodMap = new HashMap<>();
+    private Map<String, Method> uriMethodMap = new HashMap<String, Method>();
     //由于method的执行需要获取寄生的控制器
-    private Map<Method, String> methodPClassNameMap = new HashMap<>();
+    private Map<Method, String> methodPClassNameMap = new HashMap<Method, String>();
 
     //两个父容器，需要从spring中获取
-    private List<String> pClassNameList = new ArrayList<>();
-    private Map<String, Object> pClassNameContainer = new HashMap<>();
+    private List<String> pClassNameList;
+    private Map<String, Object> pClassNameContainer;
 
     public DispatcherServlet(ApplicationContext applicationContext) {
         pClassNameList = applicationContext.getPClassNameList();

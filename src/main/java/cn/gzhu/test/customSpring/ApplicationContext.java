@@ -20,13 +20,13 @@ import java.util.*;
 @Data
 public class ApplicationContext {
 
-    private Map<String, Object> idContainer = new HashMap<>();
+    private Map<String, Object> idContainer = new HashMap<String, Object>();
 
     //维护全类名与实例的关系
     //作用：1.依赖注入 2.前端控制器通过控制器全类名获取实例
-    private Map<String, Object> pClassNameContainer = new HashMap<>();
+    private Map<String, Object> pClassNameContainer = new HashMap<String, Object>();
 
-    private List<String> pClassNameList = new ArrayList<>();
+    private List<String> pClassNameList = new ArrayList<String>();
 
     private String basePacket = SpringConfig.basePacket;
 
