@@ -1,5 +1,3 @@
-# MiniMybatis
-手写mybatis
-![image](https://github.com/xiaozhi404/readme_pic/raw/master/minimybatis.png)
+手写各种流行框架并进行整合
         
       
