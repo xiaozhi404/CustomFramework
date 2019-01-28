@@ -33,6 +33,7 @@ public class MyProxy {
         proxyClassStr.append("package ")
                 .append(loader.getProxyClassPackage()).append(";").append(ln)
                 .append("import java.lang.reflect.Method;").append(ln)
+                .append("import java.util.List;").append(ln)
                 .append("import cn.gzhu.test.cutormJDKProxy.MyInvocationHandler;").append(ln)
                 .append("public class ")
                 .append(proxyClassSimpleName + " implements ")
@@ -77,22 +78,49 @@ public class MyProxy {
     private static String getMethodString(Method[] methods, Class<?> interfaces) {
         StringBuffer methodStr = new StringBuffer();
         for (Method method: methods) {
-            Class<?>[] parameterTypes = method.getParameterTypes();
-            Parameter parameter = method.getParameters()[0];
+            Parameter[] parameters = method.getParameters();
             methodStr.append(Modifier.toString(method.getModifiers()).replace("abstract", ""))
                     .append(method.getReturnType().getName()+" ")
                     .append(method.getName())
-                    .append("("+parameter.getType().getName()+" "+parameter.getName()+")").append("{").append(ln)
+                    .append("("+getMethodParam(parameters)+")").append("{").append(ln)
                     .append("try {").append(ln)
                     .append("Method met = ")
                     .append(interfaces.getName()).append(".class.getMethod(")
                     .append("\"" + method.getName() + "\"")
-                    .append(", new Class[]{"+parameter.getType().getName()+".class});").append(ln)
-                    .append("return "+"("+method.getReturnType().getName()+")this.h.invoke(this, met, new Object[]{"+parameter.getName()+"});")
+                    .append(", new Class[]{"+getInputParamType(parameters)).append(ln)
+                    .append("return "+"("+method.getReturnType().getName()+")this.h.invoke(this, met, " + getInvokeParamName(parameters))
                     .append("} catch (Throwable e) { throw new RuntimeException(e.getMessage()); }")
                     .append("}")
                     .append(ln);
         }
         return methodStr.toString();
     }
+
+    public static String getMethodParam(Parameter[] parameters) {
+        if (parameters.length > 0) {
+            Parameter parameter = parameters[0];
+            return parameter.getType().getName()+" "+parameter.getName();
+        } else {
+            return " ";
+        }
+    }
+
+    public static String getInputParamType(Parameter[] parameters) {
+        if (parameters.length > 0) {
+            Parameter parameter = parameters[0];
+            return parameter.getType().getName()+".class});";
+        } else {
+            return "});";
+        }
+    }
+
+    public static String getInvokeParamName(Parameter[] parameters) {
+        if (parameters.length > 0) {
+            Parameter parameter = parameters[0];
+            return "new Object[]{"+parameter.getName()+"});";
+        } else {
+            return "null);";
+        }
+    }
+
 }

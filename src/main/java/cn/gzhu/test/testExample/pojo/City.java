@@ -1,4 +1,4 @@
-package cn.gzhu.test.pojo;
+package cn.gzhu.test.testExample.pojo;
 
 import lombok.Data;
 

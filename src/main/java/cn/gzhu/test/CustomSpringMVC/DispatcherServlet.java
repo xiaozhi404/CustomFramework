@@ -46,7 +46,10 @@ public class DispatcherServlet extends MyServlet {
         //2.再通过类全名获取控制器
         Object controller = pClassNameContainer.get(pClassName);
         method.setAccessible(true);
-        method.invoke(controller);
+        Object invoke = method.invoke(controller);
+        if (null != invoke) {
+            myResponse.write(invoke.toString());
+        }
     }
 
     public void init() throws Exception {

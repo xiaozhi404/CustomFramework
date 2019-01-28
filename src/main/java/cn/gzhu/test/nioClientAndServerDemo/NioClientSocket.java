@@ -8,7 +8,7 @@ import java.nio.channels.SocketChannel;
 public class NioClientSocket {
 
     public static void main(String[] args) throws IOException {
-        //打开 SocketChannel
+        //打开 SocketChannel, 发送了一个连接请求
         SocketChannel socketChannel = SocketChannel.open(new InetSocketAddress("localhost", 12345));
         //设置为 非阻塞
         socketChannel.configureBlocking(false);

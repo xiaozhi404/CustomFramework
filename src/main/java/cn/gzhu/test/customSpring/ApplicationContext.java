@@ -1,15 +1,17 @@
 package cn.gzhu.test.customSpring;
 
-import cn.gzhu.test.customSpring.anno.MyAutoWired;
-import cn.gzhu.test.customSpring.anno.MyController;
-import cn.gzhu.test.customSpring.anno.MyRepository;
-import cn.gzhu.test.customSpring.anno.MyService;
+import cn.gzhu.test.customMybatis.MyDefaultSqlSession;
+import cn.gzhu.test.customMybatis.MysqlSession;
+import cn.gzhu.test.customSpring.anno.*;
 import lombok.Data;
 
 import java.io.File;
 import java.lang.reflect.Field;
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 描述：模拟spring 容器工厂
@@ -21,14 +23,13 @@ import java.util.*;
 public class ApplicationContext {
 
     private Map<String, Object> idContainer = new HashMap<String, Object>();
-
     //维护全类名与实例的关系
     //作用：1.依赖注入 2.前端控制器通过控制器全类名获取实例
     private Map<String, Object> pClassNameContainer = new HashMap<String, Object>();
-
     private List<String> pClassNameList = new ArrayList<String>();
-
     private String basePacket = SpringConfig.basePacket;
+
+    private MysqlSession session = new MyDefaultSqlSession();
 
     public void init() {
         try {
@@ -55,7 +56,9 @@ public class ApplicationContext {
                 scanBasePacket(basePacket + "." + file.getName());
             } else {
                 //去掉文件后缀 .class
-                pClassNameList.add(basePacket + "." + file.getName().split("\\.")[0]);
+                if (file.getName().contains(".class")) {
+                    pClassNameList.add(basePacket + "." + file.getName().replace(".class", ""));
+                }
             }
         }
     }
@@ -71,19 +74,24 @@ public class ApplicationContext {
                 Object o = clazz.newInstance();
                 idContainer.put(myController.value(), o);
                 pClassNameContainer.put(pClassName, o);
-                System.out.println("初始化controller" + pClassName + "; id为" + myController.value());
+                System.out.println("初始化controller:  " + pClassName + "; id为" + myController.value());
             } else if (clazz.isAnnotationPresent(MyService.class)) {
                 MyService myService = (MyService) clazz.getAnnotation(MyService.class);
                 Object o = clazz.newInstance();
                 idContainer.put(myService.value(), o);
                 pClassNameContainer.put(pClassName, o);
-                System.out.println("初始化service" + pClassName + "; id为" + myService.value());
+                System.out.println("初始化service:  " + pClassName + "; id为" + myService.value());
             } else if (clazz.isAnnotationPresent(MyRepository.class)) {
                 MyRepository myRepository = (MyRepository) clazz.getAnnotation(MyRepository.class);
                 Object o = clazz.newInstance();
                 idContainer.put(myRepository.value(), o);
                 pClassNameContainer.put(pClassName, o);
-                System.out.println("初始化repository" + pClassName + "; id为" + myRepository.value());
+                System.out.println("初始化repository:  " + pClassName + "; id为" + myRepository.value());
+            } else if (clazz.isAnnotationPresent(MyMapper.class)) {
+                MyMapper myMapper = (MyMapper) clazz.getAnnotation(MyMapper.class);
+                Object mapper = session.getMapper(clazz);
+                idContainer.put(myMapper.value(), clazz.cast(mapper));
+                System.out.println("初始化mapper:  " + pClassName + "; id为" + myMapper.value());
             }
         }
     }

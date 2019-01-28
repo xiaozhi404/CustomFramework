@@ -56,7 +56,7 @@ public class MyTomcat {
         }
     }
 
-    public void start() throws Exception {
+    public void start() {
         ServerSocket serverSocket = null;
         try {
             serverSocket = new ServerSocket(port);

@@ -11,6 +11,6 @@ public interface MyExecutor {
      * @param <T>
      * @return
      */
-    <T> T query(String statement);
+    <T> T query(String statement, String className);
 
 }

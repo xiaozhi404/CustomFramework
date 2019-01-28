@@ -22,9 +22,7 @@ public class MyResponse {
         httpResponse.append("HTTP/1.1 200 OK\n")
                 .append("Content-Type: text/html\n")
                 .append("\r\n")
-                .append("<html><body>")
-                .append(content)
-                .append("</html></body>");
+                .append(content);
         outputStream.write(httpResponse.toString().getBytes());
         outputStream.close();
     }

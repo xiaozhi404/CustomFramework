@@ -24,7 +24,7 @@ public class HandlerHandlerSelectionKeyImpl implements HandlerSelectionKey {
                 break;
             case SelectionKey.OP_WRITE:
                 SocketChannel writeSocketChannel = (SocketChannel) key.channel();
-                write(writeSocketChannel, selector);
+                write(writeSocketChannel);
                 break;
         }
     }
@@ -61,7 +61,7 @@ public class HandlerHandlerSelectionKeyImpl implements HandlerSelectionKey {
     }
 
     /** * 响应客户端请求 * @param socketChannel * @param selector * @throws IOException */
-    private void write(SocketChannel socketChannel, Selector selector) throws IOException {
+    private void write(SocketChannel socketChannel) throws IOException {
         //响应消息
         String responseMsg = "hello client, i am server";
         byte[] responseByte = responseMsg.getBytes();

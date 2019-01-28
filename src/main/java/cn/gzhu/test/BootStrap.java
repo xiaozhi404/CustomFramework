@@ -1,9 +1,9 @@
 package cn.gzhu.test;
 
-import cn.gzhu.test.customMybatis.CityMapper;
 import cn.gzhu.test.customMybatis.MyDefaultSqlSession;
 import cn.gzhu.test.customMybatis.MysqlSession;
-import cn.gzhu.test.pojo.City;
+import cn.gzhu.test.testExample.mapper.CityMapper;
+import cn.gzhu.test.testExample.pojo.City;
 
 /**
  * mybatis的参与角色与作用：
@@ -16,7 +16,20 @@ import cn.gzhu.test.pojo.City;
 public class BootStrap {
 
     public static void main(String[] args) {
-        Start();
+
+        StringBuffer sb = new StringBuffer();
+        String a = "hello_hh_aa";
+        String[] s = a.split("_");
+        for (String q : s) {
+            if (sb.length() < 1) {
+                sb.append(q);
+            } else {
+                sb.append(q.substring(0, 1).toUpperCase());
+                sb.append(q.substring(1).toLowerCase());
+            }
+        }
+        System.out.println(sb.toString());
+        //Start();
     }
 
     public static void Start() {
