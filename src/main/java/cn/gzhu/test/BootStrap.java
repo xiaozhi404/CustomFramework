@@ -5,6 +5,8 @@ import cn.gzhu.test.customMybatis.MysqlSession;
 import cn.gzhu.test.testExample.mapper.CityMapper;
 import cn.gzhu.test.testExample.pojo.City;
 
+import java.util.concurrent.ArrayBlockingQueue;
+
 /**
  * mybatis的参与角色与作用：
  * 1、mapper：拥有接口
@@ -16,19 +18,9 @@ import cn.gzhu.test.testExample.pojo.City;
 public class BootStrap {
 
     public static void main(String[] args) {
+        ArrayBlockingQueue<String> messageQueue = new ArrayBlockingQueue<String>(5);
 
-        StringBuffer sb = new StringBuffer();
-        String a = "hello_hh_aa";
-        String[] s = a.split("_");
-        for (String q : s) {
-            if (sb.length() < 1) {
-                sb.append(q);
-            } else {
-                sb.append(q.substring(0, 1).toUpperCase());
-                sb.append(q.substring(1).toLowerCase());
-            }
-        }
-        System.out.println(sb.toString());
+
         //Start();
     }
 
