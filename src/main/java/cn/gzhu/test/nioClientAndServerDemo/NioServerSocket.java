@@ -10,13 +10,13 @@ import java.util.Iterator;
 public class NioServerSocket {
 
     public static void main(String[] args) {
-        HandlerSelectionKey handler = new HandlerHandlerSelectionKeyImpl();
+        HandlerSelectionKey handler = new HandlerSelectionKeyImpl();
         try {
             //创建 ServerSocketChannel
             ServerSocketChannel server = ServerSocketChannel.open();
             server.configureBlocking(false);
             server.bind(new InetSocketAddress("localhost", 12345));
-            //创建 Selector
+            //创建 Selector,用于监听多个Channel的事件
             Selector selector = Selector.open();
             server.register(selector, SelectionKey.OP_ACCEPT);
             //死循环，持续接收 客户端连接
